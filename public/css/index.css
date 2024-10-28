@@ -1,0 +1,21 @@
+.add-Task_popup {
+  max-width: 300px;
+  padding: 20px 10px;
+}
+
+.add-task_form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.add-task_form input,
+.add-task_form select,
+.add-task_form button {
+  height: 35px;
+  padding: 0 5px;
+}
+
+.add-task_form input::placeholder {
+  font-size: 0.8rem;
+}

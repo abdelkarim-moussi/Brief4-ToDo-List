@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/output.css">
+    <link rel="stylesheet" href="../public/css/all.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>To Do List</title>
+</head>
+
+<body>
+
+    <header class="py-5 px-10 flex flex-wrap gap-x-10 gap-y-5 justify-center">
+        <button type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-mono text-sm px-5 py-2.5 focus:outline-none"
+            id="add-task">Add
+            Task <i class="fa fa-plus"></i>
+        </button>
+        <form action="#" class="search bg-blue-300 py-2 px-5 my-auto">
+            <input type="search" placeholder="Search a Task"
+                class="bg-transparen bg-transparent outline-none border-none text-sm">
+            <i class="fa fa-search"></i>
+        </form>
+        <button type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 font-mono text-sm px-5 py-2.5 focus:outline-none"
+            id="add-multiple-tasks">
+            Add Multiple <i class="fa fa-plus"></i>
+        </button>
+    </header>
+
+
+
+
+
+    <section class="flex-col relative mx-auto" style="width: 80%;">
+        <select name="filter" id="filter" class="bg-blue-400 px-2 py-1 text-white outline-none my-5">
+            <option value="priority">By Priority</option>
+            <option value="date">By Date</option>
+        </select>
+        <div class="task-types border border-black py-5 px-3 flex flex-wrap justify-center gap-5 mx-auto">
+            <div class="tasks-container">
+                <div class="tasks-container-Head flex  justify-between px-2 border-b border-red-400 mb-5">
+                    <h3 class="tasks-container_title text-xl">
+                        To Do
+                    </h3>
+                    <p class="todo-counter">
+                        1
+                    </p>
+                </div>
+                <div class="tasks-container_body">
+                    <div class="task p-5 border border-l-4 border-red-500 m-2">
+                        <h4 class="task-title">
+                            Task Title
+                        </h4>
+                        <div class="task-actions">
+                            <button type="button"
+                                class="text-white bg-red-500 hover:bg-red-600  font-mono text-sm px-5 py-2  focus:outline-none"
+                                id="delete">Delete
+                            </button>
+                            <button type="button"
+                                class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-sm px-5 py-2 focus:outline-none"
+                                id="edit">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tasks-container">
+                <div class="tasks-container-Head flex  justify-between px-2 border-b border-purple-400 mb-5">
+                    <h3 class="tasks-container_title text-xl">
+                        Doing
+                    </h3>
+                    <p class="todo-counter">
+                        1
+                    </p>
+                </div>
+                <div class="tasks-container_body">
+                    <div class="task p-5 border border-l-4 border-purple-500 m-2">
+                        <h4 class="task-title">
+                            Task Title
+                        </h4>
+                        <div class="task-actions">
+                            <button type="button"
+                                class="text-white bg-red-500 hover:bg-red-600  font-mono text-sm px-5 py-2  focus:outline-none"
+                                id="delete">Delete
+                            </button>
+                            <button type="button"
+                                class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-sm px-5 py-2 focus:outline-none"
+                                id="edit">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tasks-container">
+                <div class="tasks-container-Head flex  justify-between px-2 border-b border-green-400 mb-5">
+                    <h3 class="tasks-container_title text-xl">
+                        Done
+                    </h3>
+                    <p class="todo-counter">
+                        1
+                    </p>
+                </div>
+                <div class="tasks-container_body">
+                    <div class="task p-5 border border-l-4 border-green-500 m-2">
+                        <h4 class="task-title">
+                            Task Title
+                        </h4>
+                        <div class="task-actions">
+                            <button type="button"
+                                class="text-white bg-red-500 hover:bg-red-600  font-mono text-sm px-5 py-2  focus:outline-none"
+                                id="delete">Delete
+                            </button>
+                            <button type="button"
+                                class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-sm px-5 py-2 focus:outline-none"
+                                id="edit">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!--popup-->
+
+
+
+    <section class="add-Task_popup my-5 mx-auto bg-slate-800 rounded-md">
+        <h4 class="text-white mb-4 text-center">
+            add task
+        </h4>
+        <form action="" class="add-task_form">
+            <input type="text" name="task-title" id="task-Title" placeholder="Task Title"
+                class="border border-white bg-transparent rounded-md">
+            <input type="text" placeholder="Description" class="border border-white bg-transparent rounded-md">
+            <input type="date" class="bg-transparent border border-white rounded-md text-white cursor-pointer">
+            <div class="task-options flex gap-3 flex-wrap">
+                <select name="task-priority" id="task-priority"
+                    class="bg-transparent border border-white text-white rounded-md flex-1">
+                    <option value="p1">P1</option>
+                    <option value="p2">P2</option>
+                    <option value="p3">P3</option>
+                </select>
+                <select name="task-type" id="task-type"
+                    class="bg-transparent border border-white text-white rounded-md flex-1">
+                    <option value="todo">To Do</option>
+                    <option value="Doing">Doing</option>
+                    <option value="Done">Done</option>
+                </select>
+            </div>
+            <button type="submit" class="text-white rounded-md bg-blue-500">add task</button>
+        </form>
+
+    </section>
+
+
+    <!--end popup-->
+
+    <script src="../public/js/all.min.js"></script>
+    <script src="../public/js/index.js"></script>
+</body>
+
+</html>
