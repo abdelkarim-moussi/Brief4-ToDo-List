@@ -1,6 +1,6 @@
-.add-Task_popup {
-  max-width: 300px;
-  padding: 20px 10px;
+.add-Task_modal {
+  max-width: 400px;
+  padding: 25px;
 }
 
 .add-task_form {
