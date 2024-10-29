@@ -33,7 +33,7 @@
 
 
     <section id="add-task_modal"
-        class="hidden add-Task_modal my-5 mx-auto bg-slate-800 rounded-xl shadow-gray-600 shadow-md relative top-5 left-10 translate-x-10 transition ease-in-out duration-500">
+        class="hidden add-Task_modal my-5 mx-auto bg-slate-800 rounded-xl shadow-gray-600 shadow-md transition ease-in-out duration-500 fixed">
         <i class="fa fa-close text-white text-lg absolute right-3 top-3 cursor-pointer" id="close-modal"
             onclick="hideModal()"></i>
         <h4 class="text-white mb-4 text-center">
@@ -45,8 +45,9 @@
                 class="border border-white bg-transparent rounded-md text-white outline-none">
             <p class="al"></p>
             <label for="task-description" class=" text-white text-sm">Description</label>
-            <input type="text" name="task-description" id="task-description" placeholder="Description"
+            <textarea rows="4" name="task-description" id="task-description" placeholder="Description"
                 class="text-white border border-white bg-transparent rounded-md outline-none">
+            </textarea>
             <p class="al"></p>
             <label for="task-date" class="text-white text-sm">Task Date</label>
             <input type="date" name="task-date" id="task-date"
