@@ -7,7 +7,7 @@ let task_date = document.getElementById("task-date");
 let todoTasks_container = document.getElementById("todo-tasks-container");
 let doingTasks_container = document.getElementById("doing-tasks-container");
 let doneTasks_container = document.getElementById("done-tasks-container");
-let field = document.getElementById("field");
+let singleTask = document.getElementById("task");
 //form inputs values
 let task_Title = document.getElementById("task-Title");
 let task_description = document.getElementById("task-description");
@@ -62,12 +62,14 @@ let addTask = () => {
   });
   console.log(tasks);
   DisplayTasks();
+  setPriorityColor();
 };
 let DisplayTasks = () => {
-  // todoTask_container.innerHTML = "";
+  //
   tasks.map((x) => {
     if (x.type === "todo") {
-      return (todoTasks_container.innerHTML += `<div class="task p-5 border border-l-4 border-red-500 m-2 rounded-3xl shadow-md">
+      // todoTasks_container.innerHTML = "";
+      return (todoTasks_container.innerHTML += `<div class="task p-5 border border-l-4 m-2 rounded-3xl shadow-md">
       <div class="task-informations flex gap-10 flex-wrap">
           <h4 class="task-title">
               ${x.title}
@@ -88,7 +90,7 @@ let DisplayTasks = () => {
       </div>`);
     } else if (x.type === "doing") {
       return (doingTasks_container.innerHTML += `
-                            <div class="task p-5 border border-l-4 border-orange-400 m-2 rounded-3xl">
+                            <div class="task p-5 border border-l-4 m-2 rounded-3xl">
                         <div class="task-informations flex gap-10 flex-wrap">
                             <h4 class="task-title">
                                 ${x.title}</
@@ -110,7 +112,7 @@ let DisplayTasks = () => {
         `);
     } else if (x.type === "done") {
       return (doneTasks_container.innerHTML += `
-         <div class="task p-5 border border-l-4 border-green-500 m-2 rounded-3xl">
+         <div class="task p-5 border border-l-4 m-2 rounded-3xl">
                         <div class="task-informations flex gap-10 flex-wrap">
                             <h4 class="task-title" id="done-task_title">
                                ${x.title}
@@ -133,8 +135,17 @@ let DisplayTasks = () => {
   });
 };
 
-let setPriority = () => {
-if()
-}
+let setPriorityColor = () => {
+  tasks.map((task) => {
+    if (task.priority === "p1") {
+      singleTask.classList.add("border-red-500");
+      console.log(task.priority);
+    } else if (task.priority === "p2") {
+      singleTask.classList.add("border-blue-500");
+    } else if (task.priority === "p3") {
+      singleTask.classList.add("border-green-500");
+    }
+  });
+};
 
 add_taskBtn.addEventListener("click", showModal);
