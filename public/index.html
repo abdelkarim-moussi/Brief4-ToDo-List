@@ -29,56 +29,6 @@
         </button>
     </header>
 
-    <!--add task modal-->
-
-
-    <section id="add-task_modal"
-        class="hidden add-Task_modal my-5 mx-auto bg-slate-800 rounded-xl shadow-gray-600 shadow-md transition ease-in-out duration-500 fixed">
-        <i class="fa fa-close text-white text-lg absolute right-3 top-3 cursor-pointer" id="close-modal"
-            onclick="hideModal()"></i>
-        <h4 class="text-white mb-4 text-center">
-            Add Task
-        </h4>
-        <form action="" class="add-task_form" id="add-task_form">
-            <label for="task-title" class="text-white text-sm">Title</label>
-            <input type="text" name="task-title" id="task-Title" placeholder="Task Title"
-                class="border border-white bg-transparent rounded-md text-white outline-none">
-            <p class="al"></p>
-            <label for="task-description" class=" text-white text-sm">Description</label>
-            <textarea rows="4" name="task-description" id="task-description" placeholder="Description"
-                class="text-white border border-white bg-transparent rounded-md outline-none">
-            </textarea>
-            <p class="al"></p>
-            <label for="task-date" class="text-white text-sm">Task Date</label>
-            <input type="date" name="task-date" id="task-date"
-                class="bg-transparent border border-white rounded-md text-white cursor-pointer outline-none">
-
-            <div class="task-options flex gap-3 flex-wrap">
-                <label for="task-priority" class="text-white text-sm my-auto">Priority</label>
-                <select name="task-priority" id="task-priority"
-                    class="bg-transparent border border-white text-white text-sm rounded-md flex-1 outline-none cursor-pointer">
-                    <option value="p1">P1</option>
-                    <option value="p2">P2</option>
-                    <option value="p3">P3</option>
-                </select>
-                <label for="task-type" class="text-white text-sm my-auto">Type</label>
-                <select name="task-type" id="task-type"
-                    class="bg-transparent border border-white text-white text-sm rounded-md flex-1 outline-none cursor-pointer">
-                    <option value="todo">To Do</option>
-                    <option value="Doing">Doing</option>
-                    <option value="Done">Done</option>
-                </select>
-            </div>
-            <button type="submit"
-                class="text-white rounded-md bg-blue-500 hover:bg-blue-600 mt-3 transition ease-in-out duration-1000"
-                id="submit-Button">Add
-                Task</button>
-        </form>
-
-    </section>
-
-
-    <!--end popup-->
 
 
     <section
@@ -90,7 +40,8 @@
         </select>
         <div
             class="task-types bg-transparent py-5 px-3 flex flex-wrap justify-center gap-5 mx-auto rounded-3xl mt-8 md:px-2">
-            <div class="tasks-container">
+
+            <div class="tasks_container">
                 <div class="tasks-container-Head flex justify-between px-2 border-b border-red-400 mb-5">
                     <h3 class="tasks-container_title text-lg">
                         To Do
@@ -99,7 +50,7 @@
                         1
                     </p>
                 </div>
-                <div class="tasks-container_body">
+                <div class="tasks-container_body" id="todo-tasks-container">
                     <div class="task p-5 border border-l-4 border-red-500 m-2 rounded-3xl shadow-md">
                         <div class="task-informations flex gap-10 flex-wrap">
                             <h4 class="task-title">
@@ -130,7 +81,7 @@
                         1
                     </p>
                 </div>
-                <div class="tasks-container_body">
+                <div class="tasks-container_body" id="doing-tasks-container">
                     <div class="task p-5 border border-l-4 border-orange-400 m-2 rounded-3xl">
                         <div class="task-informations flex gap-10 flex-wrap">
                             <h4 class="task-title">
@@ -161,13 +112,13 @@
                         1
                     </p>
                 </div>
-                <div class="tasks-container_body">
+                <div class="tasks-container_body" id="done-tasks-container">
                     <div class="task p-5 border border-l-4 border-green-500 m-2 rounded-3xl">
                         <div class="task-informations flex gap-10 flex-wrap">
-                            <h4 class="task-title">
+                            <h4 class="task-title" id="done-task_title">
                                 Task Title
                             </h4>
-                            <p class="task-date">12-05-2024</p>
+                            <p class="task-date" id="done-task_date">12-05-2024</p>
                         </div>
                         <div class="task-actions mt-2 flex gap-3">
                             <button type="button"
@@ -184,9 +135,66 @@
                 </div>
             </div>
         </div>
+
+    </section>
+    <div id="field">
+
+    </div>
+
+    <!--add task modal-->
+
+
+    <section id="add-task_modal"
+        class="hidden add-Task_modal my-5 mx-auto bg-slate-800 rounded-xl shadow-gray-600 shadow-md transition ease-in-out duration-500 fixed">
+        <i class="fa fa-close text-white text-lg absolute right-3 top-3 cursor-pointer" id="close-modal"
+            onclick="hideModal()"></i>
+        <h4 class="text-white mb-4 text-center">
+            Add Task
+        </h4>
+        <form action="" class="add-task_form" id="add-task_form">
+            <div class="input-control">
+                <label for="task-title" class="text-white text-sm">Title</label>
+                <input type="text" name="task-title" id="task-Title" placeholder="Task Title"
+                    class="border border-white bg-transparent rounded-md text-white outline-none">
+                <div class="error-message text-red-500 text-sm"></div>
+            </div>
+            <div class="input-control">
+                <label for="task-description" class=" text-white text-sm">Description</label>
+                <textarea name="task-description" id="task-description" rows="4"
+                    class="text-white tes-sm border border-white bg-transparent rounded-md outline-none"></textarea>
+                <div class="error-message text-red-500 text-sm"></div>
+            </div>
+            <div class="input-control">
+                <label for="task-date" class="text-white text-sm">Task Date</label>
+                <input type="date" name="task-date" id="task-date"
+                    class="bg-transparent border border-white rounded-md text-white cursor-pointer outline-none">
+            </div>
+            <div class="task-options flex gap-3 flex-wrap">
+                <label for="task-priority" class="text-white text-sm my-auto">Priority</label>
+                <select name="task-priority" id="task-priority"
+                    class="bg-transparent border border-white text-white text-sm rounded-md flex-1 outline-none cursor-pointer">
+                    <option value="p1">P1</option>
+                    <option value="p2">P2</option>
+                    <option value="p3">P3</option>
+                </select>
+                <label for="task-type" class="text-white text-sm my-auto">Type</label>
+                <select name="task-type" id="task-type"
+                    class="bg-transparent border border-white text-white text-sm rounded-md flex-1 outline-none cursor-pointer">
+                    <option value="todo">To Do</option>
+                    <option value="doing">Doing</option>
+                    <option value="done">Done</option>
+                </select>
+            </div>
+            <button type="submit"
+                class="text-white rounded-md bg-blue-500 hover:bg-blue-600 mt-3 transition ease-in-out duration-1000"
+                id="submit-Button">Add
+                Task</button>
+        </form>
+
     </section>
 
 
+    <!--end popup-->
 
 
     <script src="../public/js/all.min.js"></script>
