@@ -1,3 +1,7 @@
+.tasks_container {
+  min-width: 270px;
+}
+
 .add-Task_modal {
   width: 400px;
   padding: 25px;

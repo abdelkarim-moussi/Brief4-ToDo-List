@@ -3,17 +3,16 @@ let form = document.getElementById("add-task_form");
 let add_taskBtn = document.getElementById("add-task_button");
 let close_ModalIcon = document.getElementById("close-modal");
 let submit_Btn = document.getElementById("submit-Button");
-let task_date = document.getElementById("task-date");
 let todoTasks_container = document.getElementById("todo-tasks-container");
 let doingTasks_container = document.getElementById("doing-tasks-container");
 let doneTasks_container = document.getElementById("done-tasks-container");
-let singleTask = document.getElementById("task");
+let singleTask = document.querySelector(".task");
 //form inputs values
 let task_Title = document.getElementById("task-Title");
 let task_description = document.getElementById("task-description");
 let task_priority = document.getElementById("task-priority");
 let task_type = document.getElementById("task-type");
-
+let task_date = document.getElementById("task-date");
 //functon for show and hide th modal
 function showModal() {
   if (task_Modal.classList.contains("hidden")) {
@@ -32,11 +31,12 @@ function showErrorMessage(element, error) {
 }
 //add task function
 add_taskBtn.addEventListener("click", showModal);
+
+//validation form function
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   //form validation
   // var isInvalide = true;
-
   if (task_Title.value === "") {
     // isInvalide = true;
     showErrorMessage(
@@ -47,34 +47,59 @@ form.addEventListener("submit", (e) => {
     // isInvalide = false;
     showErrorMessage(task_Title, "");
     addTask();
+    DisplayTodoTasks();
+    DisplayDoingTasks();
+    DisplayDoneTasks();
+    form.reset();
   }
-  // task_Title.value = "";
-  // task_description.value = "";
 });
-let tasks = [];
+//tasks arrays
+let todo_tasks = [];
+let doing_tasks = [];
+let done_tasks = [];
+//---------------------
+//add task function
 let addTask = () => {
-  tasks.push({
-    title: task_Title.value,
-    task_description: task_description.value,
-    date: task_date.value,
-    type: task_type.value,
-    priority: task_priority.value,
-  });
-  console.log(tasks);
-  DisplayTasks();
-  setPriorityColor();
+  if (task_type.value === "todo") {
+    todo_tasks.push({
+      title: task_Title.value,
+      description: task_description.value,
+      date: task_date.value,
+      type: task_type.value,
+      priority: task_priority.value,
+    });
+    console.log("todotasks", todo_tasks);
+  } else if (task_type.value === "doing") {
+    doing_tasks.push({
+      title: task_Title.value,
+      description: task_description.value,
+      date: task_date.value,
+      type: task_type.value,
+      priority: task_priority.value,
+    });
+    console.log("doingtasks", doing_tasks);
+  } else if (task_type.value === "done") {
+    done_tasks.push({
+      title: task_Title.value,
+      description: task_description.value,
+      date: task_date.value,
+      type: task_type.value,
+      priority: task_priority.value,
+    });
+    console.log("donetasks", done_tasks);
+  }
 };
-let DisplayTasks = () => {
-  //
-  tasks.map((x) => {
-    if (x.type === "todo") {
-      // todoTasks_container.innerHTML = "";
-      return (todoTasks_container.innerHTML += `<div class="task p-5 border border-l-4 m-2 rounded-3xl shadow-md">
+
+//function for display To Do tasks
+let DisplayTodoTasks = () => {
+  todoTasks_container.innerHTML = "";
+  todo_tasks.map((task, taskId) => {
+    todoTasks_container.innerHTML += `<div id=${taskId} class="task p-5 border border-l-4 m-2 rounded-3xl shadow-md">
       <div class="task-informations flex gap-10 flex-wrap">
           <h4 class="task-title">
-              ${x.title}
+              ${task.title}
           </h4>
-          <p class="task-date">${x.date}</p>
+          <p class="task-date">${task.date}</p>
       </div>
       <div class="task-actions mt-2 flex gap-3">
           <button type="button"
@@ -87,15 +112,26 @@ let DisplayTasks = () => {
               Edit <i class="fa-solid fa-pen-to-square"></i>
           </button>
         </div>
-      </div>`);
-    } else if (x.type === "doing") {
-      return (doingTasks_container.innerHTML += `
-                            <div class="task p-5 border border-l-4 m-2 rounded-3xl">
+      </div>`;
+    // if (task.priority === "p1") {
+    //   singleTask.classList.add("border-red-500");
+    //   console.log(singleTask);
+    // }
+    setPriorityColor();
+  });
+};
+
+//function for display doing tasks
+let DisplayDoingTasks = () => {
+  doingTasks_container.innerHTML = "";
+  doing_tasks.map((task) => {
+    doingTasks_container.innerHTML += `
+                            <div id="task"  class="task p-5 border border-l-4 m-2 rounded-3xl">
                         <div class="task-informations flex gap-10 flex-wrap">
                             <h4 class="task-title">
-                                ${x.title}</
+                                ${task.title}</
                             </h4>
-                            <p class="task-date">${x.date}</p>
+                            <p class="task-date">${task.date}</p>
                         </div>
                         <div class="task-actions mt-2 flex gap-3">
                             <button type="button"
@@ -109,15 +145,24 @@ let DisplayTasks = () => {
                             </button>
                         </div>
                     </div>
-        `);
-    } else if (x.type === "done") {
-      return (doneTasks_container.innerHTML += `
-         <div class="task p-5 border border-l-4 m-2 rounded-3xl">
+        `;
+    // if (task.priority === "p1") {
+    //   singleTask.classList.add("border-red-500");
+    //   console.log(singleTask);
+    // }
+  });
+};
+
+//function for display done tasks
+let DisplayDoneTasks = () => {
+  doneTasks_container.innerHTML = "";
+  done_tasks.map((task) => {
+    doneTasks_container.innerHTML += `<div id="task"  class="task p-5 border border-l-4 m-2 rounded-3xl">
                         <div class="task-informations flex gap-10 flex-wrap">
                             <h4 class="task-title" id="done-task_title">
-                               ${x.title}
+                               ${task.title}
                             </h4>
-                            <p class="task-date" id="done-task_date">${x.date}</p>
+                            <p class="task-date" id="done-task_date">${task.date}</p>
                         </div>
                         <div class="task-actions mt-2 flex gap-3">
                             <button type="button"
@@ -130,22 +175,23 @@ let DisplayTasks = () => {
                                 Edit <i class="fa-solid fa-pen-to-square"></i>
                             </button>
                         </div>
-                    </div>`);
-    }
+                    </div>`;
+    // if (task.priority === "p1") {
+    //   singleTask.classList.add("border-red-500");
+    //   console.log(singleTask);
+    // }
   });
 };
 
 let setPriorityColor = () => {
-  tasks.map((task) => {
-    if (task.priority === "p1") {
-      singleTask.classList.add("border-red-500");
-      console.log(task.priority);
-    } else if (task.priority === "p2") {
-      singleTask.classList.add("border-blue-500");
-    } else if (task.priority === "p3") {
-      singleTask.classList.add("border-green-500");
-    }
-  });
+  if (task_priority.value === "p1") {
+    singleTask.classList.add("border-red-500");
+    console.log(task_priority.value);
+  } else if (task_priority.value === "p2") {
+    singleTask.classList.add("border-blue-500");
+  } else if (task_priority.value === "p3") {
+    singleTask.classList.add("border-green-500");
+  }
 };
 
 add_taskBtn.addEventListener("click", showModal);
