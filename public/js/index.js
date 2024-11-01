@@ -56,13 +56,44 @@ form.addEventListener("submit", (e) => {
     addTask();
     displaytasks();
     form.reset();
+    filterByPriority();
   }
 });
+
 //tasks array
 let tasks = [];
+let filtredTask = [];
+let todoTasks = [];
+let doingTasks = [];
+let doneTasks = [];
 //---------------------
 //add task function
 let addTask = () => {
+  // if (task_type.value === "todo") {
+  //   todoTasks.push({
+  //     title: task_Title.value,
+  //     description: task_description.value,
+  //     date: task_date.value,
+  //     type: task_type.value,
+  //     priority: task_priority.value,
+  //   });
+  // } else if (task_type.value === "doing") {
+  //   doingTasks.push({
+  //     title: task_Title.value,
+  //     description: task_description.value,
+  //     date: task_date.value,
+  //     type: task_type.value,
+  //     priority: task_priority.value,
+  //   });
+  // } else if (task_type.value === "done") {
+  //   doneTasks.push({
+  //     title: task_Title.value,
+  //     description: task_description.value,
+  //     date: task_date.value,
+  //     type: task_type.value,
+  //     priority: task_priority.value,
+  //   });
+  // }
   tasks.push({
     title: task_Title.value,
     description: task_description.value,
@@ -70,6 +101,13 @@ let addTask = () => {
     type: task_type.value,
     priority: task_priority.value,
   });
+};
+let filterByPriority = () => {
+  for (let item of tasks) {
+    if (item.type === "todo") {
+      filtredTask.push(item);
+    }
+  }
 };
 
 let displaytasks = () => {
@@ -79,6 +117,32 @@ let displaytasks = () => {
   todoTasks_container.innerHTML = "";
   doingTasks_container.innerHTML = "";
   doneTasks_container.innerHTML = "";
+  console.log(filtredTask.length);
+  // console.log(todoTasks);
+  // todoTasks.map((task, taskId) => {
+  //   if (task.type === "todo") {
+  //   }
+  //   todoTasks_container.innerHTML += `<div id=${taskId} class="task p-5 border border-l-4 m-2 rounded-3xl shadow-md">
+  //       <div class="task-informations flex gap-10 flex-wrap">
+  //           <h4 class="task-title">
+  //               ${task.title}
+  //           </h4>
+  //           <p class="task-date">${task.date}</p>
+  //       </div>
+  //       <div class="task-actions mt-2 flex gap-3">
+  //           <button type="button" onClick = "deleteTask(this)"
+  //               class=" text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
+  //               Delete <i class="fa fa-trash"></i>
+  //           </button>
+  //           <button type="button"
+  //               class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000" >
+  //               Edit <i class="fa-solid fa-pen-to-square"></i>
+  //           </button>
+  //         </div>
+  //       </div>`;
+  //   todoN = todoTasks.length;
+  //   todoCounter.innerHTML = todoN;
+  // });
   tasks.map((task, taskId) => {
     if (task.type === "todo") {
       todoTasks_container.innerHTML += `<div id=${taskId} class="task p-5 border border-l-4 m-2 rounded-3xl shadow-md">
@@ -149,23 +213,36 @@ let displaytasks = () => {
   });
 };
 
+let filterTasks = () => {
+  for (let i = 0; i <= tasks.length; i++) {
+    if (
+      transferPriority(tasks[i].priority) >
+      transferPriority(tasks[i + 1].priority)
+    ) {
+      tasks[i] = tasks[i + 1];
+      console.log(tasks[i]);
+      filtredTask.push(tasks[i]);
+    }
+  }
+  // for(let i = 0; i <= tasks.length ; i++){
+
+  //   if(tasks[i].)
+  // }
+};
+let transferPriority = (p) => {
+  if (p === "p1") return 1;
+  else if (p === "p2") return 2;
+  else if (p === "p3") return 3;
+};
 //delete task function
 let deleteTask = (e) => {
   // console.log(tasks[n]);
   // console.log(task);
   e.parentElement.parentElement.remove();
   tasks.splice(e.parentElement.parentElement.id, 1);
-
-  console.log(
-    tasks.filter(() => {
-      tasks.map((task) => {
-        task.type === "todo";
-        console.log(task.type);
-      });
-    }).length
-  );
-  todoCounter.innerHTML = todoN;
 };
+
+//filter function
 
 // let setPriorityColor = () => {
 //   if (task_priority.value === "p1") {
