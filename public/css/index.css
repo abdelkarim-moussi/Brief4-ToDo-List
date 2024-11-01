@@ -1,6 +1,9 @@
 .tasks_container {
   min-width: 270px;
 }
+.b-color {
+  border-color: red;
+}
 
 .add-Task_modal {
   width: 400px;

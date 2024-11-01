@@ -7,6 +7,14 @@ let todoTasks_container = document.getElementById("todo-tasks-container");
 let doingTasks_container = document.getElementById("doing-tasks-container");
 let doneTasks_container = document.getElementById("done-tasks-container");
 let singleTask = document.querySelector(".task");
+//counters
+let todoCounter = document.getElementById("todo-counter");
+let doingCounter = document.getElementById("doing-counter");
+let doneCounter = document.getElementById("done-counter");
+//counters variables
+let todoN;
+let doingN;
+let doneN;
 //form inputs values
 let task_Title = document.getElementById("task-Title");
 let task_description = document.getElementById("task-description");
@@ -35,66 +43,45 @@ add_taskBtn.addEventListener("click", showModal);
 //validation form function
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+
   //form validation
-  // var isInvalide = true;
+
   if (task_Title.value === "") {
-    // isInvalide = true;
     showErrorMessage(
       task_Title,
       "your title must contains at least 5 caracteres"
     );
   } else {
-    // isInvalide = false;
     showErrorMessage(task_Title, "");
     addTask();
-    DisplayTodoTasks();
-    DisplayDoingTasks();
-    DisplayDoneTasks();
+    displaytasks();
     form.reset();
   }
 });
-//tasks arrays
-let todo_tasks = [];
-let doing_tasks = [];
-let done_tasks = [];
+//tasks array
+let tasks = [];
 //---------------------
 //add task function
 let addTask = () => {
-  if (task_type.value === "todo") {
-    todo_tasks.push({
-      title: task_Title.value,
-      description: task_description.value,
-      date: task_date.value,
-      type: task_type.value,
-      priority: task_priority.value,
-    });
-    console.log("todotasks", todo_tasks);
-  } else if (task_type.value === "doing") {
-    doing_tasks.push({
-      title: task_Title.value,
-      description: task_description.value,
-      date: task_date.value,
-      type: task_type.value,
-      priority: task_priority.value,
-    });
-    console.log("doingtasks", doing_tasks);
-  } else if (task_type.value === "done") {
-    done_tasks.push({
-      title: task_Title.value,
-      description: task_description.value,
-      date: task_date.value,
-      type: task_type.value,
-      priority: task_priority.value,
-    });
-    console.log("donetasks", done_tasks);
-  }
+  tasks.push({
+    title: task_Title.value,
+    description: task_description.value,
+    date: task_date.value,
+    type: task_type.value,
+    priority: task_priority.value,
+  });
 };
 
-//function for display To Do tasks
-let DisplayTodoTasks = () => {
+let displaytasks = () => {
+  todoN = 0;
+  doingN = 0;
+  doneN = 0;
   todoTasks_container.innerHTML = "";
-  todo_tasks.map((task, taskId) => {
-    todoTasks_container.innerHTML += `<div id=${taskId} class="task p-5 border border-l-4 m-2 rounded-3xl shadow-md">
+  doingTasks_container.innerHTML = "";
+  doneTasks_container.innerHTML = "";
+  tasks.map((task, taskId) => {
+    if (task.type === "todo") {
+      todoTasks_container.innerHTML += `<div id=${taskId} class="task p-5 border border-l-4 m-2 rounded-3xl shadow-md">
       <div class="task-informations flex gap-10 flex-wrap">
           <h4 class="task-title">
               ${task.title}
@@ -102,96 +89,96 @@ let DisplayTodoTasks = () => {
           <p class="task-date">${task.date}</p>
       </div>
       <div class="task-actions mt-2 flex gap-3">
-          <button type="button"
-              class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000"
-              id="delete">Delete <i class="fa fa-trash"></i>
+          <button type="button" onClick = "deleteTask(this)"
+              class=" text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
+              Delete <i class="fa fa-trash"></i>
           </button>
           <button type="button"
-              class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000"
-              id="edit">
+              class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000" >
               Edit <i class="fa-solid fa-pen-to-square"></i>
           </button>
         </div>
       </div>`;
-    // if (task.priority === "p1") {
-    //   singleTask.classList.add("border-red-500");
-    //   console.log(singleTask);
-    // }
-    setPriorityColor();
+      todoN++;
+      todoCounter.innerHTML = todoN;
+    } else if (task.type === "doing") {
+      doingTasks_container.innerHTML += `
+      <div id=${taskId}  class="task p-5 border border-l-4 m-2 rounded-3xl">
+         <div class="task-informations flex gap-10 flex-wrap">
+          <h4 class="task-title">
+          ${task.title}</
+         </h4>
+         <p class="task-date">${task.date}</p>
+      </div>
+      <div class="task-actions mt-2 flex gap-3">
+      <button type="button" onClick = "deleteTask(this)"
+          class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
+          Delete <i class="fa fa-trash"></i>
+      </button>
+      <button type="button"
+          class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
+          Edit <i class="fa-solid fa-pen-to-square"></i>
+          </button>
+      </div>
+      </div>
+    `;
+      doingN++;
+      doingCounter.innerHTML = doingN;
+    } else if (task.type === "done") {
+      doneTasks_container.innerHTML += `<div id=${taskId}  class="task p-5 border border-l-4 m-2 rounded-3xl">
+          <div class="task-informations flex gap-10 flex-wrap">
+              <h4 class="task-title" id="done-task_title">
+               ${task.title}
+              </h4>
+               <p class="task-date" id="done-task_date">${task.date}</p>
+                </div>
+              <div class="task-actions mt-2 flex gap-3">
+                 <button type="button" onClick = "deleteTask(this)"
+                   class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
+                    Delete <i class="fa fa-trash"></i>
+                </button>
+                <button type="button"
+                class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-emerald-800 transition ease-in-out duration-1000" >
+                    Edit <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+             </div>
+          </div>`;
+      doneN++;
+      doneCounter.innerHTML = doneN;
+    }
   });
 };
 
-//function for display doing tasks
-let DisplayDoingTasks = () => {
-  doingTasks_container.innerHTML = "";
-  doing_tasks.map((task) => {
-    doingTasks_container.innerHTML += `
-                            <div id="task"  class="task p-5 border border-l-4 m-2 rounded-3xl">
-                        <div class="task-informations flex gap-10 flex-wrap">
-                            <h4 class="task-title">
-                                ${task.title}</
-                            </h4>
-                            <p class="task-date">${task.date}</p>
-                        </div>
-                        <div class="task-actions mt-2 flex gap-3">
-                            <button type="button"
-                                class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000"
-                                id="delete">Delete <i class="fa fa-trash"></i>
-                            </button>
-                            <button type="button"
-                                class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000"
-                                id="edit">
-                                Edit <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        </div>
-                    </div>
-        `;
-    // if (task.priority === "p1") {
-    //   singleTask.classList.add("border-red-500");
-    //   console.log(singleTask);
-    // }
-  });
+//delete task function
+let deleteTask = (e) => {
+  // console.log(tasks[n]);
+  // console.log(task);
+  e.parentElement.parentElement.remove();
+  tasks.splice(e.parentElement.parentElement.id, 1);
+
+  console.log(
+    tasks.filter(() => {
+      tasks.map((task) => {
+        task.type === "todo";
+        console.log(task.type);
+      });
+    }).length
+  );
+  todoCounter.innerHTML = todoN;
 };
 
-//function for display done tasks
-let DisplayDoneTasks = () => {
-  doneTasks_container.innerHTML = "";
-  done_tasks.map((task) => {
-    doneTasks_container.innerHTML += `<div id="task"  class="task p-5 border border-l-4 m-2 rounded-3xl">
-                        <div class="task-informations flex gap-10 flex-wrap">
-                            <h4 class="task-title" id="done-task_title">
-                               ${task.title}
-                            </h4>
-                            <p class="task-date" id="done-task_date">${task.date}</p>
-                        </div>
-                        <div class="task-actions mt-2 flex gap-3">
-                            <button type="button"
-                                class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000"
-                                id="delete">Delete <i class="fa fa-trash"></i>
-                            </button>
-                            <button type="button"
-                                class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-emerald-800 transition ease-in-out duration-1000"
-                                id="edit">
-                                Edit <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        </div>
-                    </div>`;
-    // if (task.priority === "p1") {
-    //   singleTask.classList.add("border-red-500");
-    //   console.log(singleTask);
-    // }
-  });
-};
+// let setPriorityColor = () => {
+//   if (task_priority.value === "p1") {
+//     singleTask.classList.add("border-red-500");
+//     console.log(singleTask);
+//   } else if (task_priority.value === "p2") {
+//     singleTask.classList.add("border-blue-500");
+//     console.log(singleTask);
+//   } else if (task_priority.value === "p3") {
+//     singleTask.classList.add("border-green-500");
+//     console.log(singleTask);
+//   }
+// };
 
-let setPriorityColor = () => {
-  if (task_priority.value === "p1") {
-    singleTask.classList.add("border-red-500");
-    console.log(task_priority.value);
-  } else if (task_priority.value === "p2") {
-    singleTask.classList.add("border-blue-500");
-  } else if (task_priority.value === "p3") {
-    singleTask.classList.add("border-green-500");
-  }
-};
-
+// deleteBtn.addEventListener("click", deletTask(deletTask(deleteBtn)));
 add_taskBtn.addEventListener("click", showModal);
