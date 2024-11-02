@@ -10,7 +10,7 @@
     <title>To Do List</title>
 </head>
 
-<body class="relative">
+<body class="relative p-5">
     <header class="py-5 px-10 flex flex-wrap gap-x-10 gap-y-5 justify-center">
         <button type="button"
             class="text-white bg-blue-700 hover:bg-blue-800 font-mono text-sm px-5 py-2.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000"
@@ -29,84 +29,50 @@
         </button>
     </header>
 
-
-
-    <section
-        class="flex-col relative mx-auto shadow-gray-300 shadow-sm rounded-3xl p-10 text-black md:p-5 sm:w-[100%] md:w-[80%]">
+    <main class="flex-col relative mx-auto shadow-gray-300 shadow-sm rounded-3xl p-10 text-black md:p-5">
         <select name="filter" id="filter"
             class="bg-gray-200 px-3 py-1.5 text-black text-sm outline-none my-5 rounded-3xl absolute top-2 right-5">
+            <option value="all">all</option>
             <option value="p1">p1</option>
             <option value="p2">p2</option>
             <option value="p3">p3</option>
         </select>
-        <div
-            class="task-types bg-transparent py-5 px-3 flex flex-wrap justify-center gap-5 mx-auto rounded-3xl mt-8 md:px-2">
-
-            <div class="tasks_container">
-                <div class="tasks-container-Head flex justify-between px-2 border-b border-red-400 mb-5">
-                    <h3 class="tasks-container_title text-lg">
+        <section
+            class="task-types bg-transparent py-5 px-3 flex flex-wrap justify-center content-center gap-5 mx-auto rounded-3xl mt-8 md:px-2 items-start">
+            <!--todo tasks container-->
+            <section class="border border-blue-500 rounded-xl py-2 min-w-[320px]">
+                <div class="tasks-container-Head flex justify-between px-2 border-b border-blue-500 mb-5">
+                    <h3 class="tasks-container_title text-2xl text-blue-500">
                         To Do
                     </h3>
-                    <p id="todo-counter" class="text-red-500">
+                    <p id="todo-counter" class="text-blue-500">
                         0
                     </p>
                 </div>
                 <div class="tasks-container_body" id="todo-tasks-container">
-                    <!-- <div class="task p-5 border border-l-4 m-2 rounded-3xl shadow-md">
-                        <div class="task-informations flex gap-10 flex-wrap">
-                            <h4 class="task-title">
-                                Task Title
-                            </h4>
-                            <p class="task-date">12-05-2024</p>
-                        </div>
-                        <div class="task-actions mt-2 flex gap-3">
-                            <button type="button"
-                                class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000"
-                                id="delete">Delete <i class="fa fa-trash"></i>
-                            </button>
-                            <button type="button"
-                                class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000"
-                                id="edit">
-                                Edit <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        </div>
-                    </div> -->
+
                 </div>
-            </div>
-            <div class="tasks_container">
-                <div class="tasks-container-Head flex  justify-between px-2 border-b border-orange-400 mb-5">
-                    <h3 class="tasks-container_title text-lg">
+            </section>
+
+            <!--doing tasks container-->
+            <section class="border border-purple-600 rounded-xl py-2 min-w-[320px]">
+                <div class="tasks-container-Head flex  justify-between px-2 border-b border-purple-600 mb-5">
+                    <h3 class="tasks-container_title text-2xl text-purple-600">
                         Doing
                     </h3>
-                    <p id="doing-counter" class="text-orange-400">
+                    <p id="doing-counter" class="text-purple-600">
                         0
                     </p>
                 </div>
                 <div class="tasks-container_body" id="doing-tasks-container">
-                    <!-- <div class="task p-5 border border-l-4 m-2 rounded-3xl">
-                        <div class="task-informations flex gap-10 flex-wrap">
-                            <h4 class="task-title">
-                                Task Title
-                            </h4>
-                            <p class="task-date">12-05-2024</p>
-                        </div>
-                        <div class="task-actions mt-2 flex gap-3">
-                            <button type="button"
-                                class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">Delete
-                                <i class="fa fa-trash"></i>
-                            </button>
-                            <button type="button"
-                                class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000"
-                                id="edit">
-                                Edit <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        </div>
-                    </div> -->
+
                 </div>
-            </div>
-            <div class="tasks_container">
+            </section>
+
+            <!--done tasks container-->
+            <section class="border border-green-500 rounded-xl py-2 min-w-[320px]">
                 <div class="tasks-container-Head flex  justify-between px-2 border-b border-green-400 mb-5">
-                    <h3 class="tasks-container_title text-lg">
+                    <h3 class="tasks-container_title text-2xl text-green-500">
                         Done
                     </h3>
                     <p id="done-counter" class="text-green-500">
@@ -114,33 +80,13 @@
                     </p>
                 </div>
                 <div class="tasks-container_body" id="done-tasks-container">
-                    <!-- <div class="task p-5 border border-l-4 m-2 rounded-3xl">
-                        <div class="task-informations flex gap-10 flex-wrap">
-                            <h4 class="task-title" id="done-task_title">
-                                Task Title
-                            </h4>
-                            <p class="task-date" id="done-task_date">12-05-2024</p>
-                        </div>
-                        <div class="task-actions mt-2 flex gap-3">
-                            <button type="button"
-                                class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">Delete
-                                <i class="fa fa-trash"></i>
-                            </button>
-                            <button type="button"
-                                class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-emerald-800 transition ease-in-out duration-1000"
-                                id="edit">
-                                Edit <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        </div>
-                    </div> -->
+
                 </div>
-            </div>
-        </div>
+            </section>
+        </section>
 
-    </section>
-    <div id="field">
-
-    </div>
+        </section>
+    </main>
 
     <!--add task modal-->
 
@@ -178,8 +124,8 @@
                     <option value="p2">P2</option>
                     <option value="p3">P3</option>
                 </select>
-                <label for="task-type" class="text-white text-sm my-auto">Type</label>
-                <select name="task-type" id="task-type"
+                <label for="task-status" class="text-white text-sm my-auto">Type</label>
+                <select name="task-status" id="task-status"
                     class="bg-transparent border border-white text-white text-sm rounded-md flex-1 outline-none cursor-pointer">
                     <option value="todo">To Do</option>
                     <option value="doing">Doing</option>
