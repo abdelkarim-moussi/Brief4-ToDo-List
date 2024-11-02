@@ -58,11 +58,13 @@ let validateForm = () => {
     showErrorMessage(task_Title, "");
     addTasks();
     form.reset();
-    displayTasks();
   }
 };
 
 let tasks = [];
+let p1tasks = [];
+let p2tasks = [];
+let p3tasks = [];
 
 //add task function
 let addTasks = () => {
@@ -73,10 +75,18 @@ let addTasks = () => {
     status: task_status.value,
     priority: task_priority.value,
   });
+  displayTasks(tasks);
+  setPriorityColor(tasks);
+  p1tasks = tasks.filter((task) => task.priority === "p1");
+  p2tasks = tasks.filter((task) => task.priority === "p2");
+  p3tasks = tasks.filter((task) => task.priority === "p3");
+  console.log("p1tasks", p1tasks);
+  console.log("p2tasks", p2tasks);
+  console.log("p3tasks", p3tasks);
 };
 
 //display tasks function
-let displayTasks = () => {
+let displayTasks = (tasks) => {
   todoTasks_container.innerHTML = "";
   doingTasks_container.innerHTML = "";
   doneTasks_container.innerHTML = "";
@@ -149,11 +159,10 @@ let displayTasks = () => {
       Done_counter.innerText = doneC;
     }
   });
-  setPriorityColor();
 };
 
 //set color for easch task function
-let setPriorityColor = () => {
+let setPriorityColor = (tasks) => {
   tasks.map((task, taskId) => {
     let singleTask = document.getElementById(taskId);
     if (task.priority === "p1") {
@@ -186,10 +195,29 @@ let deleteTask = (e) => {
 };
 
 //filter function
-// let filterTasks = () => {
-//   if (filter.value === "p1") {
-//     tasks = tasks.filter((task) => task.priority != "p1");
-//     displayTasks();
-//   }
-// };
-// filter.addEventListener("select", filterTasks);
+let filterTasks = () => {
+  for (let i = 0; i <= tasks.length; i++) {
+    switch (filter.value) {
+      case "all":
+        displayTasks(tasks);
+        setPriorityColor(tasks);
+        break;
+      case "p1":
+        displayTasks(p1tasks);
+        setPriorityColor(p1tasks);
+        break;
+      case "p2":
+        displayTasks(p2tasks);
+        setPriorityColor(p2tasks);
+        break;
+      case "p3":
+        displayTasks(p3tasks);
+        setPriorityColor(p3tasks);
+        break;
+      default:
+        displayTasks(tasks);
+        setPriorityColor(tasks);
+        break;
+    }
+  }
+};
