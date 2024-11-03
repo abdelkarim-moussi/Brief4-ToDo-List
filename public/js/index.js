@@ -54,8 +54,14 @@ form.addEventListener("submit", (e) => {
 let validateForm = () => {
   if (task_Title.value === "" || task_Title.value > 10) {
     showErrorMessage(task_Title, "the title can not be empty");
+  } else if (task_description.value === "") {
+    showErrorMessage(task_description, "description field can not be empty");
+  } else if (task_date.value === "") {
+    showErrorMessage(task_date, "you need to give a date for your task");
   } else {
     showErrorMessage(task_Title, "");
+    showErrorMessage(task_description, "");
+    showErrorMessage(task_date, "");
     addTasks();
     form.reset();
   }
