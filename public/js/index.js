@@ -237,6 +237,7 @@ let changeTaskStatus = (e) => {
     }
   });
   e.parentElement.parentElement.remove();
+  tasks.splice(e.parentElement.parentElement.id, 1);
 };
 
 //sort by date function
