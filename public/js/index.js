@@ -110,7 +110,7 @@ let displayTasks = (tasks) => {
             class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
             Delete <i class="fa fa-trash"></i>
           </button>
-          <button type="button"
+          <button type="button" onclick = "changeTaskStatus(this)"
             class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
             Edit <i class="fa-solid fa-pen-to-square"></i>
           </button>
@@ -131,7 +131,7 @@ let displayTasks = (tasks) => {
             class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
             Delete <i class="fa fa-trash"></i>
           </button>
-          <button type="button"
+          <button type="button" onclick = "changeTaskStatus(this)"
             class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
             Edit <i class="fa-solid fa-pen-to-square"></i>
           </button>
@@ -152,7 +152,7 @@ let displayTasks = (tasks) => {
             class="text-white bg-red-500 hover:bg-red-600  font-mono text-xs px-5 py-1.5  focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
             Delete <i class="fa fa-trash"></i>
           </button>
-          <button type="button"
+          <button type="button" onclick = "changeTaskStatus(this)"
             class="text-white bg-orange-400 hover:bg-orange-500 font-mono text-xs px-5 py-1.5 focus:outline-none rounded-3xl shadow-md transition ease-in-out duration-1000">
             Edit <i class="fa-solid fa-pen-to-square"></i>
           </button>
@@ -223,6 +223,21 @@ let filterTasks = () => {
   }
 };
 filter.addEventListener("change", filterTasks);
+
+//change task status
+let changeTaskStatus = (e) => {
+  showModal();
+  tasks.map((task, taskId) => {
+    if (e.parentElement.parentElement.id == taskId) {
+      task_Title.value = task.title;
+      task_description.value = task.description;
+      task_date.value = task.date;
+      task_status.value = task.status;
+      task_priority.value = task.priority;
+    }
+  });
+  e.parentElement.parentElement.remove();
+};
 
 //sort by date function
 
