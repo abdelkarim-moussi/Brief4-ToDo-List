@@ -71,7 +71,6 @@ let tasks = [];
 let p1tasks = [];
 let p2tasks = [];
 let p3tasks = [];
-let sortedTasks = [];
 
 //add task function
 let addTasks = () => {
@@ -200,29 +199,27 @@ let deleteTask = (e) => {
 
 //filter function
 let filterTasks = () => {
-  for (let i = 0; i <= tasks.length; i++) {
-    switch (filter.value) {
-      case "all":
-        displayTasks(tasks);
-        setPriorityColor(tasks);
-        break;
-      case "p1":
-        displayTasks(p1tasks);
-        setPriorityColor(p1tasks);
-        break;
-      case "p2":
-        displayTasks(p2tasks);
-        setPriorityColor(p2tasks);
-        break;
-      case "p3":
-        displayTasks(p3tasks);
-        setPriorityColor(p3tasks);
-        break;
-      default:
-        displayTasks(tasks);
-        setPriorityColor(tasks);
-        break;
-    }
+  switch (filter.value) {
+    case "all":
+      displayTasks(tasks);
+      setPriorityColor(tasks);
+      break;
+    case "p1":
+      displayTasks(p1tasks);
+      setPriorityColor(p1tasks);
+      break;
+    case "p2":
+      displayTasks(p2tasks);
+      setPriorityColor(p2tasks);
+      break;
+    case "p3":
+      displayTasks(p3tasks);
+      setPriorityColor(p3tasks);
+      break;
+    default:
+      displayTasks(tasks);
+      setPriorityColor(tasks);
+      break;
   }
 };
 filter.addEventListener("change", filterTasks);
