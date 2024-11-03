@@ -1,20 +1,19 @@
 let task_Modal = document.getElementById("add-task_modal");
 let form = document.getElementById("add-task_form");
 let add_taskBtn = document.getElementById("add-task_button");
-let close_ModalIcon = document.getElementById("close-modal");
 let submit_Btn = document.getElementById("submit-Button");
 let todoTasks_container = document.getElementById("todo-tasks-container");
 let doingTasks_container = document.getElementById("doing-tasks-container");
 let doneTasks_container = document.getElementById("done-tasks-container");
 let filter = document.getElementById("filter");
-
-// let singleTask = document.createElement("div");
+let sort = document.getElementById("sortBy-Date");
 //form inputs values
 let task_Title = document.getElementById("task-Title");
 let task_description = document.getElementById("task-description");
 let task_priority = document.getElementById("task-priority");
 let task_status = document.getElementById("task-status");
 let task_date = document.getElementById("task-date");
+
 //tasks counters variables
 let Todo_counter = document.getElementById("todo-counter");
 let Doing_counter = document.getElementById("doing-counter");
@@ -23,7 +22,7 @@ let todoC;
 let doingC;
 let doneC;
 
-//functons for show and hide th modal
+//functions for show and hide the modal
 function showModal() {
   if (task_Modal.classList.contains("hidden")) {
     task_Modal.classList.remove("hidden");
@@ -41,6 +40,7 @@ function showErrorMessage(element, error) {
   const erroDisplay = inputControl.querySelector(".error-message");
   erroDisplay.innerHTML = error;
 }
+
 //add events to buttons
 add_taskBtn.addEventListener("click", showModal);
 // submit_Btn.addEventListener("click", hideModal);
@@ -65,6 +65,7 @@ let tasks = [];
 let p1tasks = [];
 let p2tasks = [];
 let p3tasks = [];
+let sortedTasks = [];
 
 //add task function
 let addTasks = () => {
@@ -80,9 +81,6 @@ let addTasks = () => {
   p1tasks = tasks.filter((task) => task.priority === "p1");
   p2tasks = tasks.filter((task) => task.priority === "p2");
   p3tasks = tasks.filter((task) => task.priority === "p3");
-  console.log("p1tasks", p1tasks);
-  console.log("p2tasks", p2tasks);
-  console.log("p3tasks", p3tasks);
 };
 
 //display tasks function
@@ -221,3 +219,69 @@ let filterTasks = () => {
     }
   }
 };
+filter.addEventListener("change", filterTasks);
+
+//sort by date function
+
+let sortByDate = () => {
+  if (sort.value === "new") {
+    tasks.sortByDate();
+    displayTasks(tasks);
+    // setPriorityColor(tasks);
+  }
+};
+
+sort.addEventListener("change", sortByDate);
+
+//animations
+
+task_Modal.animate(
+  [
+    {
+      transform: "translateX(0)",
+      opacity: 0,
+    },
+    {
+      transform: "translateX(100P)",
+      opacity: 1,
+    },
+  ],
+  {
+    duration: 2000,
+    transition: "all .5s ease-in-out",
+  }
+);
+
+const main = document.querySelector("main");
+const header = document.querySelector("header");
+main.animate(
+  [
+    {
+      transform: "scale(0.9)",
+      opacity: 0.5,
+    },
+    {
+      transform: "scale(1)",
+      opacity: 1,
+    },
+  ],
+  {
+    duration: 3000,
+  }
+);
+
+header.animate(
+  [
+    {
+      transform: "scale(0.8)",
+      opacity: 0.5,
+    },
+    {
+      transform: "scale(1)",
+      opacity: 1,
+    },
+  ],
+  {
+    duration: 2000,
+  }
+);
